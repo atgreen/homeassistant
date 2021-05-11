@@ -1,4 +1,4 @@
-FROM ubi8/ubi
+FROM ubi8/python-38
 
 MAINTAINER Eric Lajoie < eric@lajoie.de >
 
@@ -6,19 +6,22 @@ ENV HA_HOME=/opt/homeassistant
 
 WORKDIR ${HA_HOME}
 
-RUN dnf install -y --setopt=tsflags=nodocs \
-    gcc make gcc-c++ systemd-devel \
-    unzip tar python38 python38-devel \
-    dnf-utils && \
-    subscription-manager repos --enable codeready-builder-for-rhel-8-x86_64-rpms && \
+RUN su &&\
+    dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils && \
+    dnf config-manager --set-enabled ubi-8-codeready-builder && \
     dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
     dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm && \
+    dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-8.noarch.rpm && \
+    dnf install -y http://rpmfind.net/linux/epel/7/x86_64/Packages/s/SDL2-2.0.14-2.el7.x86_64.rpm && \
     dnf install -y --setopt=tsflags=nodocs ffmpeg && \
     dnf -y update && dnf clean all -y
 
-RUN pip3 install --no-cache-dir homeassistant home-assistant-frontend \
-    homeassistant-pyozw colorlog flask-sqlalchemy
+RUN pip3 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
+
+RUN python --version
+
+RUN python -m homeassistant
 
 EXPOSE 8123
 
-CMD [ "python3", "-m", "homeassistant" ]
+CMD [ "python", "-m", "homeassistant" ]
