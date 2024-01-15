@@ -1,4 +1,4 @@
-FROM ubi8/python-38
+FROM registry.access.redhat.com/ubi9/python-311
 
 MAINTAINER Anthony Green <green@moxielogic.com>
 
