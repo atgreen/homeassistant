@@ -1,6 +1,6 @@
 FROM ubi8/python-38
 
-MAINTAINER Eric Lajoie < eric@lajoie.de >
+MAINTAINER Anthony Green <green@moxielogic.com>
 
 ENV HA_HOME=/opt/homeassistant
 
