@@ -25,8 +25,6 @@ USER 1000
 RUN python3 -m venv --system-site-packages /opt/homeassistant
 RUN pip3.9 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
 
-RUN python3.9 --version
-
 EXPOSE 8123
 
-CMD [ "python3.9", "-m", "homeassistant" ]
+CMD [ "/opt/homeassistant/bin/python3.9", "-m", "homeassistant" ]
