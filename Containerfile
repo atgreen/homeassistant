@@ -28,4 +28,4 @@ RUN chmod -R go+rwx /opt/homeassistant
 
 EXPOSE 8123
 
-CMD [ "/opt/homeassistant/bin/python3.9", "-m", "homeassistant", "-c", "/opt/homeassistant/configuration.yaml" ]
+CMD [ "/opt/homeassistant/bin/python3.9", "-m", "homeassistant", "-c", "/opt/homeassistant/etc/configuration.yaml" ]
