@@ -24,6 +24,7 @@ USER 1000
 
 RUN python3 -m venv --system-site-packages /opt/homeassistant
 RUN pip3.9 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
+RUN chmod -R go+rwx /opt/homeassistant
 
 EXPOSE 8123
 
