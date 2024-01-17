@@ -14,7 +14,7 @@ RUN useradd -r -u 1000  -m -d /opt/homeassistant -s /bin/bash homeassistant
 WORKDIR ${HA_HOME}
 
 USER 0
-RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils python3.9-pip python3.9-devel && \
+RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils python3.9-pip python3.9-devel wget && \
     dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm && \
     dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm && \
     dnf install -y http://rpmfind.net/linux/epel/7/x86_64/Packages/s/SDL2-2.0.14-2.el7.x86_64.rpm && \
