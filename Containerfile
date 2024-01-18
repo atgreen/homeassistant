@@ -22,6 +22,7 @@ RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip 
     dnf install -y --setopt=tsflags=nodocs ffmpeg && \
     dnf -y update && dnf clean all -y
 RUN dnf install -y python3.12-devel
+RUN dnf install -y compat-ffmpeg4-devel
 USER 1000
 
 RUN python3.12 -m venv --system-site-packages /opt/homeassistant
