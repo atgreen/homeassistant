@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream9
+FROM fedora
 
 ENV LC_ALL=C.utf8 \
     LANG=C.utf8 \
@@ -14,18 +14,21 @@ RUN useradd -r -u 1000  -m -d /opt/homeassistant -s /bin/bash homeassistant
 WORKDIR ${HA_HOME}
 
 USER 0
-RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils python3.9-pip python3.9-devel wget && \
-    dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm && \
-    dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-9.noarch.rpm && \
-    dnf install -y http://rpmfind.net/linux/epel/7/x86_64/Packages/s/SDL2-2.0.14-2.el7.x86_64.rpm && \
+RUN yum install -y openssl-devel bzip2-devel libffi-devel wget python3.10
+RUN yum groupinstall -y "Development Tools"
+RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils wget && \
+    dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm && \
+    dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm && \
     dnf install -y --setopt=tsflags=nodocs ffmpeg && \
     dnf -y update && dnf clean all -y
+RUN dnf install -y python3.10-devel
 USER 1000
 
-RUN python3 -m venv --system-site-packages /opt/homeassistant
-RUN pip3.9 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
+RUN python3.10 -m venv --system-site-packages /opt/homeassistant
+# RUN pip3.10 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
+RUN pip3.10 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend colorlog flask-sqlalchemy
 RUN chmod -R go+rwx /opt/homeassistant
 
 EXPOSE 8123
 
-CMD [ "/opt/homeassistant/bin/python3.9", "-m", "homeassistant" ]
+CMD [ "/opt/homeassistant/bin/python3.10", "-m", "homeassistant" ]
