@@ -18,8 +18,8 @@ RUN dnf update -y
 RUN dnf install -y openssl-devel bzip2-devel libffi-devel wget python3.12
 RUN dnf groupinstall -y "Development Tools"
 RUN dnf install -y --setopt=tsflags=nodocs gcc make gcc-c++ systemd-devel unzip tar dnf-utils wget && \
-    dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-39.noarch.rpm && \
-    dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-39.noarch.rpm && \
+    dnf install -y https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-40.noarch.rpm && \
+    dnf install -y https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-40.noarch.rpm && \
     dnf install -y --setopt=tsflags=nodocs ffmpeg && \
     dnf -y update && dnf clean all -y
 RUN dnf install -y python3.12-devel
