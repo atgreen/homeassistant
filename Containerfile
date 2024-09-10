@@ -28,7 +28,7 @@ RUN dnf install -y compat-ffmpeg4-devel
 USER 1000
 
 RUN python3.12 -m venv --system-site-packages /opt/homeassistant
-# RUN pip3.12 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
+## RUN pip3.12 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend homeassistant-pyozw colorlog flask-sqlalchemy
 RUN pip3.12 install --no-cache-dir aiohttp_cors homeassistant home-assistant-frontend colorlog flask-sqlalchemy
 RUN chmod -R go+rwx /opt/homeassistant
 
